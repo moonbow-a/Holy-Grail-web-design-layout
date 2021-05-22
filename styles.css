@@ -1,0 +1,60 @@
+html {
+  width: 100%;
+  height: 100vh;
+  background: rgb(0, 0, 0, 0.1);
+  font-size: 1em;
+}
+body {
+  margin: 0;
+  height: 100%;
+}
+
+div.container {
+  min-height: 25rem; /* mainbody height never squishes < 25rem */
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 10rem auto 10rem;
+  grid-template-rows: 5rem auto 5rem;
+  grid-template-areas:
+    "head head head"
+    "panleft mainbody panright"
+    "foot foot foot";
+}
+div.header {
+  background: rgb(0, 0, 0, 0.2); /* 20% black */
+  grid-area: head; /* head corresponds to name in template */
+}
+div.footer {
+  background: rgb(0, 0, 0, 0.2);
+  grid-area: foot;
+}
+div.panel {
+  /* div elements with "panel" class */
+  background: rgb(0, 0, 0, 0.1); /* 10% black */
+}
+div.panel.left {
+  /* with both "panel" and "left" class */
+  grid-area: panleft;
+}
+div.panel.right {
+  grid-area: panright;
+}
+div.mainbody {
+  grid-area: mainbody;
+  width: 30rem; /* mainbody width is fixed */
+  justify-self: center; /* and always centered in grid area */
+}
+
+@media screen and (max-width: 50rem) {
+  /* if viewport width < 50rem */
+  div.panel.left {
+    grid-column-end: left; /* left panel stops at left edge */
+  }
+  div.panel.right {
+    grid-column-start: right; /* right panel starts at right edge */
+  }
+  div.panel {
+    display: none; /* neither panel is displayed */
+  }
+}
